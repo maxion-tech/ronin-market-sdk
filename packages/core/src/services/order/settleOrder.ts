@@ -33,6 +33,7 @@ export const settleErc721Order = (
   order: Order,
   settlePrice: string,
   referralAddr: string,
+  recipient?: string,
   options?: ethers.Overrides,
 ) => {
   const { provider, account } = wallet;
@@ -42,12 +43,14 @@ export const settleErc721Order = (
   const erc721Order = generateErc721Order(order);
 
   return marketGatewayContract.settleOrder({
+    
     expectedState,
     settlePrice,
     account,
     signature,
     chainId,
     referralAddr,
+    recipient,
     order: erc721Order,
     options,
   });
@@ -61,6 +64,7 @@ export const swapTokensAndSettleErc721Order = (
   tokenPaths: string[],
   deadline: string,
   referralAddr: string,
+  recipient?: string,
   options?: ethers.Overrides,
 ) => {
   const { provider, account } = wallet;
@@ -76,6 +80,7 @@ export const swapTokensAndSettleErc721Order = (
     signature,
     account,
     referralAddr,
+    recipient,
     deadline,
     order: erc721Order,
     options,
@@ -90,6 +95,7 @@ export const swapRONAndSettleErc721Order = (
   tokenPaths: string[],
   deadline: string,
   referralAddr: string,
+  recipient?: string,
   options?: ethers.Overrides,
 ) => {
   const { provider, account } = wallet;
@@ -102,6 +108,7 @@ export const swapRONAndSettleErc721Order = (
     expectedState,
     settlePrice,
     referralAddr,
+    recipient,
     path: tokenPaths,
     signature,
     account,
@@ -119,6 +126,7 @@ export const settleErc1155Order = (
   settlePrice: string,
   quantity: number,
   referralAddr: string,
+  recipient?: string,
   options?: ethers.Overrides,
 ) => {
   const { provider, account } = wallet;
@@ -134,6 +142,7 @@ export const settleErc1155Order = (
     signature,
     chainId,
     referralAddr,
+    recipient,
     quantity,
     order: erc1155Order,
     options,
@@ -149,6 +158,7 @@ export const swapTokensAndSettleErc1155Order = (
   quantity: number,
   deadline: string,
   referralAddr: string,
+  recipient?: string,
   options?: ethers.Overrides,
 ) => {
   const { provider, account } = wallet;
@@ -164,6 +174,7 @@ export const swapTokensAndSettleErc1155Order = (
     signature,
     account,
     referralAddr,
+    recipient,
     deadline,
     quantity,
     order: erc1155Order,
@@ -180,6 +191,7 @@ export const swapRONAndSettleErc1155Order = (
   quantity: number,
   deadline: string,
   referralAddr: string,
+  recipient?: string,
   options?: ethers.Overrides,
 ) => {
   const { provider, account } = wallet;
@@ -195,6 +207,7 @@ export const swapRONAndSettleErc1155Order = (
     path: tokenPaths,
     signature,
     account,
+    recipient,
     deadline,
     quantity,
     order: erc1155Order,

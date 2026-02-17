@@ -27,13 +27,15 @@ export const approveWRonToken = async (params: ApproveWRonTokenParams) => {
 };
 
 export const approveErc20Token = async (params: ApproveErc20TokenParams) => {
-  const { chainId, wallet, address, spenderContract, options } = params;
+  const { chainId, wallet, address, spenderAddress, options } = params;
   const { provider, account } = wallet;
   const approvedValue = BigNumber.from('1').shl(256).sub(1).toString();
 
-  const spenderAddress = getSpenderContractAddress(chainId, spenderContract);
+  const config = getConfig(chainId);
+  const spender = spenderAddress || config.contractsAddress.marketGateway;
+
   const erc20Contract = createErc20Contract(address, provider);
-  return erc20Contract.approve(spenderAddress, approvedValue, { ...options, from: account });
+  return erc20Contract.approve(spender, approvedValue, { ...options, from: account });
 };
 
 export const approveErc721Token = async (params: ApproveErc721TokenParams) => {

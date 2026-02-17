@@ -1,4 +1,4 @@
-import { ChainId, SpenderContractType } from '../../types';
+import { ChainId } from '../../types';
 import { checkIsErc20Approved } from './checkIsTokenApproved';
 import { getSwapConfig } from './configs';
 import { TokenData } from './data';
@@ -10,10 +10,10 @@ export const getTokensNeedToApprove = async (
   inputTokenAddress: string,
   outputTokenAddress: string,
   amount: string,
-  spenderContract?: SpenderContractType,
+  spenderAddress?: string,
 ) => {
   if (inputTokenAddress.toLowerCase() === outputTokenAddress.toLowerCase()) {
-    const isAllowed = await checkIsErc20Approved(chainId, account, inputTokenAddress, amount, spenderContract);
+    const isAllowed = await checkIsErc20Approved(chainId, account, inputTokenAddress, amount, spenderAddress);
     const paymentToken = getPaymentToken(chainId, inputTokenAddress);
     return isAllowed ? [] : [paymentToken];
   }
@@ -22,7 +22,7 @@ export const getTokensNeedToApprove = async (
   const tokens = swapConfig[inputTokenAddress]?.tokens || [];
 
   const tokensNeedToApprove = await tokens.reduce(async (results, currentToken) => {
-    const isAllowed = await checkIsErc20Approved(chainId, account, currentToken.address, amount, spenderContract);
+    const isAllowed = await checkIsErc20Approved(chainId, account, currentToken.address, amount, spenderAddress);
     const tokensData = await results;
     if (!isAllowed) {
       return [...tokensData, currentToken];

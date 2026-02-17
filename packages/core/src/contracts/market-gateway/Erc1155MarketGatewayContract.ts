@@ -14,6 +14,7 @@ export interface SettleOrderData {
   settlePrice: BigNumberish;
   quantity: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   signature: BytesLike;
   order: Erc1155Order;
   account: string;
@@ -25,6 +26,7 @@ export interface SwapSettleOrderData {
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   deadline: BigNumberish;
   path: string[];
   signature: BytesLike;
@@ -101,7 +103,7 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
   }
 
   async settleErc1155Order(data: SettleOrderData) {
-    const { order, signature, referralAddr, expectedState, quantity, settlePrice, account, chainId, options } = data;
+    const { order, signature, referralAddr, expectedState, quantity, settlePrice, account, chainId, options, recipient } = data;
     const { paymentToken } = order;
     const tokens = getPaymentTokens(chainId);
 
@@ -113,7 +115,7 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
     const encodeParams = this.encodeParamsForSettleErc1155Order(orderInfo, quantity, settlePrice);
@@ -129,14 +131,14 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
   }
 
   async swapRONAndSettleErc1155Order(data: SwapSettleOrderData) {
-    const { signature, referralAddr, expectedState, account, quantity, deadline, path, settlePrice, options } = data;
+    const { signature, referralAddr, expectedState, account, quantity, deadline, path, settlePrice, options, recipient } = data;
     const encodedOrder = this.encodeErc1155Order(data.order);
     const orderInfo: SettleParameterStruct = {
       orderData: encodedOrder,
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
     const encodeParams = this.encodeParamsForSwapRonAndSettleErc1155Order(orderInfo, quantity, deadline, path);
@@ -148,7 +150,7 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
   }
 
   async swapTokensAndSettleErc1155Order(data: SwapSettleOrderData) {
-    const { signature, referralAddr, expectedState, order, quantity, settlePrice, deadline, path, account, options } =
+    const { signature, referralAddr, expectedState, order, quantity, settlePrice, deadline, path, account, options, recipient } =
       data;
     const encodedOrder = this.encodeErc1155Order(order);
     const orderInfo: SettleParameterStruct = {
@@ -156,7 +158,7 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
     const encodeParams = this.encodeParamsForSwapSettleErc1155Order(orderInfo, quantity, settlePrice, deadline, path);
@@ -165,8 +167,4 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
   }
 }
 
-export const createErc1155MarketGatewayContract = (chainId: ChainId, provider?: WalletProvider) => {
-  const config = getConfig(chainId);
-  const marketGatewayAddress = config.contractsAddress.marketGateway;
-  return new Erc1155MarketGatewayContract(marketGatewayAddress, MARKET_GATEWAY_ABI, provider);
-};
+
