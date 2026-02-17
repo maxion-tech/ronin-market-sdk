@@ -19,6 +19,7 @@ import {
   Erc1155MarketGatewayContract,
   RoyaltyRegistry,
   Wron,
+  KatanaContract,
 } from '../../src/contracts';
 import ERC721_ABI from '../../src/contracts/abis/erc721.json';
 import { chainId, erc721TokenAddress, erc1155TokenAddress } from '../data-mock';
@@ -59,7 +60,7 @@ describe('test contracts', () => {
     const katanaContractAddress = config.contractsAddress.katana;
     const contract = createKatanaContract(chainId);
 
-    expect(typeof contract).toBeInstanceOf<Erc20>;
+    expect(typeof contract).toBeInstanceOf<KatanaContract>;
     expect(contract.address).toBe(katanaContractAddress);
   });
 

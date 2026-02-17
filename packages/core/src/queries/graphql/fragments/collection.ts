@@ -10,7 +10,6 @@ export const CollectionFragment = gql`
     totalListing
     erc
     allowedPaymentTokens
-    volumeAllTime
   }
 `;
 

@@ -14,7 +14,7 @@ export interface ApproveTokenParams {
   wallet: WalletClient;
   address: string;
   tokenType: ApproveTokenType;
-  spenderContract?: SpenderContractType;
+  spenderAddress?: string;
   options?: ethers.Overrides;
 }
 

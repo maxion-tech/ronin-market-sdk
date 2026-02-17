@@ -4,21 +4,22 @@ import { ZERO_ADDRESS } from '../../common/constants';
 import { getConfig } from '../../configs';
 import { Token } from '../../services/tokens/data';
 import { getPaymentTokens } from '../../services/tokens/getPaymentTokens';
-import { ChainId, Erc721Order, Erc1155Order, WalletClient } from '../../types';
+import { ChainId, Erc1155Order, Erc721Order, WalletClient } from '../../types';
 import { InteractWithParamsStruct } from '../abis/types/v5/MarketGatewayMultisend';
 import { SettleParameterStruct } from '../abis/types/v5/MavisExchange';
 import {
-  createErc1155MarketGatewayContract,
   Erc1155MarketGatewayContract,
-  SettleOrderData,
+  SettleOrderData
 } from './Erc1155MarketGatewayContract';
-import { createMarketGatewayContract, MarketGatewayContract, SettleOrderContractParams } from './MarketGatewayContract';
+import { createErc1155MarketGatewayContract, createMarketGatewayContract } from './factory';
+import { MarketGatewayContract, SettleOrderContractParams } from './MarketGatewayContract';
 
 export interface BulkSettleErc721OrderData {
   chainId: ChainId;
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   signature: BytesLike;
   order: Erc721Order;
   deadline?: BigNumberish;
@@ -30,6 +31,7 @@ export interface BulkSettleErc1155OrderData {
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   signature: BytesLike;
   order: Erc1155Order;
   quantity: BigNumberish;
@@ -55,7 +57,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
     orderData: BulkSettleErc721OrderData,
     paymentToken: string,
   ) {
-    const { order, signature, referralAddr, expectedState, settlePrice, deadline, path } = orderData;
+    const { order, signature, referralAddr, expectedState, settlePrice, deadline, path, recipient } = orderData;
     const { provider, account } = wallet;
     const { paymentToken: listingToken } = order;
 
@@ -67,7 +69,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
 
@@ -102,7 +104,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
     orderData: BulkSettleErc1155OrderData,
     paymentToken: string,
   ) {
-    const { order, signature, referralAddr, expectedState, settlePrice, quantity, deadline, path } = orderData;
+    const { order, signature, referralAddr, expectedState, settlePrice, quantity, deadline, path, recipient } = orderData;
     const { provider, account } = wallet;
     const { paymentToken: listingToken } = order;
 
@@ -114,7 +116,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
 

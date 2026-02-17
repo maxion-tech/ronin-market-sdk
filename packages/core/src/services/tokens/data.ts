@@ -6,6 +6,7 @@ export enum Token {
   AXS = 'AXS',
   SLP = 'SLP',
   USDC = 'USDC',
+  ION = 'ION',
 }
 
 export interface TokenData {
@@ -23,7 +24,7 @@ export type Tokens = { [key in ChainId]: { [key in Token]: TokenData } };
 export const paymentTokens: Tokens = {
   [ChainId.testnet]: {
     [Token.RON]: {
-      chainId: 2021,
+      chainId: 202601,
       address: '0xa959726154953bae111746e265e6d754f48570e6',
       decimals: 18,
       symbol: 'RON',
@@ -32,7 +33,7 @@ export const paymentTokens: Tokens = {
       imageUrl: 'https://cdn.skymavis.com/ronin/2021/ron/logo-transparent.png',
     },
     [Token.WETH]: {
-      chainId: 2021,
+      chainId: 202601,
       address: '0x29c6f8349a028e1bdfc68bfa08bdee7bc5d47e16',
       decimals: 18,
       symbol: 'WETH',
@@ -42,7 +43,7 @@ export const paymentTokens: Tokens = {
         'https://cdn.skymavis.com/ronin/2021/erc20/0x29c6f8349a028e1bdfc68bfa08bdee7bc5d47e16/logo-transparent.png',
     },
     [Token.AXS]: {
-      chainId: 2021,
+      chainId: 202601,
       address: '0x3c4e17b9056272ce1b49f6900d8cfd6171a1869d',
       decimals: 18,
       symbol: 'AXS',
@@ -52,7 +53,7 @@ export const paymentTokens: Tokens = {
         'https://cdn.skymavis.com/ronin/2021/erc20/0x3c4e17b9056272ce1b49f6900d8cfd6171a1869d/logo-transparent.png',
     },
     [Token.SLP]: {
-      chainId: 2021,
+      chainId: 202601,
       address: '0x82f5483623d636bc3deba8ae67e1751b6cf2bad2',
       decimals: 0,
       symbol: 'SLP',
@@ -62,7 +63,7 @@ export const paymentTokens: Tokens = {
         'https://cdn.skymavis.com/ronin/2021/erc20/0x82f5483623d636bc3deba8ae67e1751b6cf2bad2/logo-transparent.png',
     },
     [Token.USDC]: {
-      chainId: 2021,
+      chainId: 202601,
       address: '0x067fbff8990c58ab90bae3c97241c5d736053f77',
       decimals: 6,
       symbol: 'USDC',
@@ -70,6 +71,16 @@ export const paymentTokens: Tokens = {
       unit: 'mwei',
       imageUrl:
         'https://cdn.skymavis.com/ronin/2021/erc20/0x067fbff8990c58ab90bae3c97241c5d736053f77/logo-transparent.png',
+    },
+    [Token.ION]: {
+      chainId: 202601,
+      address: '0xcC5da0dA34dE144d4a3766F4Dd15C727E75B6116',
+      decimals: 6,
+      symbol: 'ION',
+      name: 'ION',
+      unit: 'mwei',
+      imageUrl:
+        'https://cdn.skymavis.com/ronin/2020/erc20/0x44f4ee8df6333f655e5486a400b2f93b220f6ee1/logo-transparent.png',
     },
   },
   [ChainId.mainnet]: {
@@ -122,12 +133,22 @@ export const paymentTokens: Tokens = {
       imageUrl:
         'https://cdn.skymavis.com/ronin/2020/erc20/0x0b7007c13325c48911f73a2dad5fa5dcbf808adc/logo-transparent.png',
     },
+    [Token.ION]: {
+      chainId: 2020,
+      address: '0x44f4ee8df6333f655e5486a400b2f93b220f6ee1',
+      decimals: 6,
+      symbol: 'ION',
+      name: 'ION',
+      unit: 'mwei',
+      imageUrl:
+        'https://cdn.skymavis.com/ronin/2020/erc20/0x44f4ee8df6333f655e5486a400b2f93b220f6ee1/logo-transparent.png',
+    },
   },
 };
 
 export const wRonToken = {
   [ChainId.testnet]: {
-    chainId: 2021,
+    chainId: 202601,
     address: '0xa959726154953bae111746e265e6d754f48570e6',
     decimals: 18,
     symbol: 'WRON',

@@ -5,23 +5,28 @@
 With yarn
 
 ```
- yarn add @sky-mavis/mavis-market-core
+ yarn add @zentry/mavis-market-sdk
 ```
 
 With npm
 
 ```
- npm install @sky-mavis/mavis-market-core --save
+ npm install @zentry/mavis-market-sdk --save
 ```
 
 ## Usage
+
+### Environment Variables
+
+The SDK supports using the API Gateway endpoint for mainnet by setting the `MARKETPLACE_API_KEY` environment variable. When this variable is set, requests to mainnet will automatically use the API Gateway endpoint instead of the default GraphQL endpoint.
+
 
 ### Fetch data
 
 #### _Get all collections_
 
 ```javascript
-import { ChainId, getCollections } from '@sky-mavis/mavis-market-core';
+import { ChainId, getCollections } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -35,11 +40,11 @@ const { erc721Collections, erc1155Collections } = await getCollections(params);
 #### _Get collection detail_
 
 ```javascript
-import { ChainId, getCollection } from '@sky-mavis/mavis-market-core';
+import { ChainId, getCollection } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
 };
 
 const collection = await getCollection(params);
@@ -48,11 +53,11 @@ const collection = await getCollection(params);
 #### _Get token metadata_
 
 ```javascript
-import { ChainId, getTokenMetadata } from '@sky-mavis/mavis-market-core';
+import { ChainId, getTokenMetadata } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
   showAttributes: true, // Optional
 };
 
@@ -67,15 +72,16 @@ import {
   AuctionType,
   ListingSortBy,
   getAllTokens,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  owner: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  owner: "0xce21e5ed74935379eda4d9120c3887423f960aac",
   from: 0,
   size: 1,
   auctionType: AuctionType.ForSale, // Optional
   sort: ListingSortBy.PriceAsc, // Optional
+  tokenAddresses: ["0x3fe52e39c3241ee5440a57edbb553563356b770c"], // Optional
 };
 
 const { total, tokens } = await getAllTokens(params);
@@ -89,28 +95,28 @@ import {
   AuctionType,
   SortBy,
   getErc721Tokens,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
   from: 0,
   size: 10,
-  owner: '0xce21e5ed74935379eda4d9120c3887423f960aac', // Optional
+  owner: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional
   auctionType: AuctionType.NotForSale, // Optional
-  criteria: [{ name: 'attribute_1', values: ['value_1', 'value_2'] }], // Optional
+  criteria: [{ name: "attribute_1", values: ["value_1", "value_2"] }], // Optional
   sort: SortBy.SortBy, // Optional
-  name: 'Cyberkongz', // Optional
+  name: "Cyberkongz", // Optional
   priceRange: {
-    from: '1000000000000000000',
-    to: '1000000000000000000',
+    from: "1000000000000000000",
+    to: "1000000000000000000",
   }, // Optional
   rangeCriteria: [
     {
-      name: 'attribute_1',
+      name: "attribute_1",
       range: {
-        from: '1000000000000000000',
-        to: '1000000000000000000',
+        from: "1000000000000000000",
+        to: "1000000000000000000",
       },
     },
   ], // Optional
@@ -122,12 +128,12 @@ const { total, results } = await getErc721Tokens(params);
 #### _Get erc721 token detail_
 
 ```javascript
-import { ChainId, getErc721Token } from '@sky-mavis/mavis-market-core';
+import { ChainId, getErc721Token } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  tokenId: '982',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  tokenId: "982",
 };
 
 const data = await getErc721Token(params);
@@ -139,12 +145,12 @@ const data = await getErc721Token(params);
 import {
   ChainId,
   getErc721TokenTransferHistory,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  tokenId: '982',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  tokenId: "982",
   from: 0,
   size: 10,
 };
@@ -160,18 +166,18 @@ import {
   AuctionType,
   SortBy,
   getErc1155Tokens,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
   from: 0,
   size: 10,
-  owner: '0xce21e5ed74935379eda4d9120c3887423f960aac', // Optional
+  owner: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional
   auctionType: AuctionType.NotForSale, // Optional
-  criteria: [{ name: 'attribute_1', values: ['value_1', 'value_2'] }], // Optional
+  criteria: [{ name: "attribute_1", values: ["value_1", "value_2"] }], // Optional
   sort: SortBy.PriceAsc, // Optional
-  name: 'Cyberkongz', // Optional
+  name: "Cyberkongz", // Optional
 };
 
 const { total, results } = await getErc1155Tokens(params);
@@ -180,14 +186,62 @@ const { total, results } = await getErc1155Tokens(params);
 #### _Get erc1155 token detail_
 
 ```javascript
-import { ChainId, getErc1155Token } from '@sky-mavis/mavis-market-core';
+import { ChainId, getErc1155Token } from "@zentry/mavis-market-sdk";
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
 };
 
 const data = await getErc1155Token(params);
+```
+
+#### _Get erc1155 token with orders_
+
+```javascript
+import { ChainId, getErc1155TokenWithOrders } from '@sky-mavis/mavis-market-core';
+
+const params = {
+  chainId: ChainId.testnet,
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
+};
+
+const data = await getErc1155TokenWithOrders(params);
+```
+
+#### _Get erc1155 tokens list_
+
+```javascript
+import {
+  ChainId,
+  getErc1155TokensList,
+  AuctionType,
+  SortBy,
+} from '@sky-mavis/mavis-market-core';
+
+const params = {
+  chainId: ChainId.testnet,
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  from: 0,
+  size: 10,
+  owner: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional
+  auctionType: AuctionType.NotForSale, // Optional
+  criteria: [{ name: "attribute_1", values: ["value_1", "value_2"] }], // Optional
+  sort: SortBy.PriceAsc, // Optional
+  name: "Cyberkongz", // Optional
+  rangeCriteria: [
+    {
+      name: "attribute_1",
+      range: {
+        from: "1000000000000000000",
+        to: "1000000000000000000",
+      },
+    },
+  ], // Optional
+};
+
+const { total, results } = await getErc1155TokensList(params);
 ```
 
 #### _Get erc1155 token transfer history_
@@ -196,12 +250,12 @@ const data = await getErc1155Token(params);
 import {
   ChainId,
   getErc1155TokenTransferHistory,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
   from: 0,
   size: 10,
 };
@@ -212,13 +266,13 @@ const { total, results } = await getErc1155TokenTransferHistory(params);
 #### _Get erc1155 balance_
 
 ```javascript
-import { ChainId, getErc1155Balance } from '@sky-mavis/mavis-market-core';
+import { ChainId, getErc1155Balance } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
-  owner: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
+  owner: "0xce21e5ed74935379eda4d9120c3887423f960aac",
 };
 
 const balance = await getErc1155Balance(params);
@@ -227,29 +281,30 @@ const balance = await getErc1155Balance(params);
 #### _Get erc721 order_
 
 ```javascript
-import { ChainId, getErc721Order } from '@sky-mavis/mavis-market-core';
+import { ChainId, getErc721Order } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  tokenId: '982',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  tokenId: "982",
 };
 
 const order = await getErc721Order(params);
 ```
 
 #### _Get erc721 active orders of tokens_
+
 ```javascript
-import { ChainId, getActiveOrdersOfTokens } from '@sky-mavis/mavis-market-core';
+import { ChainId, getActiveOrdersOfTokens } from "@zentry/mavis-market-sdk";
 
 const tokenIds = [
   {
-    tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-    tokenId: '1460',
+    tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+    tokenId: "1460",
   },
   {
-    tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-    tokenId: '508',
+    tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+    tokenId: "508",
   },
 ];
 
@@ -265,15 +320,15 @@ import {
   ChainId,
   Erc1155SortBy,
   getErc1155Orders,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
   from: 0,
   size: 10,
-  maker: '0xce21e5ed74935379eda4d9120c3887423f960aac', // Optional,
+  maker: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional,
   showInvalid: true, // Optional
   sort: Erc1155SortBy.PriceAsc, // Optional
 };
@@ -284,11 +339,11 @@ const orders = await getErc1155Orders(params);
 #### _Get order by hash_
 
 ```javascript
-import { ChainId, getOrderByHash } from '@sky-mavis/mavis-market-core';
+import { ChainId, getOrderByHash } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  hash: 'f7c91f6f72b3fc2c19efea6abf34a6e713abc67c3beab9b152fa1f591b4472c8',
+  hash: "f7c91f6f72b3fc2c19efea6abf34a6e713abc67c3beab9b152fa1f591b4472c8",
 };
 
 const order = await getOrderByHash(params);
@@ -302,18 +357,18 @@ import {
   ListingSortBy,
   Erc,
   getOrdersByAddress,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   accessToken: '',
   chainId: ChainId.testnet,
-  account: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
   from: 0,
   size: 10,
   sort: ListingSortBy.PriceAsc, // Optional
   isValid: true, // Optional
   collectibleFilters: {
-    tokenAddresses: ['0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09'],
+    tokenAddresses: ["0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09"],
     erc: Erc.Erc1155,
   }, // Optional
 };
@@ -324,12 +379,12 @@ const { total, quantity, data } = await getOrdersByAddress(params);
 #### _Get offers_
 
 ```javascript
-import { ChainId, getOffers } from '@sky-mavis/mavis-market-core';
+import { ChainId, getOffers } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  tokenId: '982',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  tokenId: "982",
   from: 0,
   size: 10,
 };
@@ -340,11 +395,11 @@ const offers = await getOffers(params);
 #### _Get offer detail_
 
 ```javascript
-import { ChainId, getOffer } from '@sky-mavis/mavis-market-core';
+import { ChainId, getOffer } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  hash: '1c91a5a0d8ef022344166e60e3da96ba819278fe496c4008bc0d028e8c9ab690',
+  hash: "1c91a5a0d8ef022344166e60e3da96ba819278fe496c4008bc0d028e8c9ab690",
 };
 
 const offer = await getOffer(params);
@@ -358,15 +413,15 @@ import {
   getSentOffers,
   Erc,
   OfferSortBy,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
   from: 0,
   size: 10,
-  account: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
   collectibleFilters: {
-    tokenAddresses: ['0x3fe52e39c3241ee5440a57edbb553563356b770c'],
+    tokenAddresses: ["0x3fe52e39c3241ee5440a57edbb553563356b770c"],
     erc: Erc.Erc721,
   }, // Optional
   isValid: true, // Optional
@@ -384,15 +439,15 @@ import {
   Erc,
   OfferSortBy,
   getReceivedOffers,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
   from: 0,
   size: 10,
-  account: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
   collectibleFilters: {
-    tokenAddresses: ['0x3fe52e39c3241ee5440a57edbb553563356b770c'],
+    tokenAddresses: ["0x3fe52e39c3241ee5440a57edbb553563356b770c"],
     erc: Erc.Erc721,
   }, // Optional
   isValid: true, // Optional
@@ -405,11 +460,11 @@ const { total, data } = await getReceivedOffers(params);
 #### _Get offers amount_
 
 ```javascript
-import { ChainId, getOffersAmount } from '@sky-mavis/mavis-market-core';
+import { ChainId, getOffersAmount } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  account: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
 };
 
 const { receivedOffersAmount, sentOffersAmount } = await getOffersAmount(
@@ -420,13 +475,13 @@ const { receivedOffersAmount, sentOffersAmount } = await getOffersAmount(
 #### _Get offer by address_
 
 ```javascript
-import { ChainId, getOfferByAddress } from '@sky-mavis/mavis-market-core';
+import { ChainId, getOfferByAddress } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  tokenId: '982',
-  account: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  tokenId: "982",
+  account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
 };
 
 const offer = await getOfferByAddress(params);
@@ -435,13 +490,26 @@ const offer = await getOfferByAddress(params);
 #### _Get exchange rate_
 
 ```javascript
-import { ChainId, getExchangeRate } from '@sky-mavis/mavis-market-core';
+import { ChainId, getExchangeRate } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
 };
 
 const exchangeRate = await getExchangeRate(params);
+```
+
+#### _Get collection analytics_
+
+```javascript
+import { ChainId, getCollectionAnalytics } from '@sky-mavis/mavis-market-core';
+
+const params = {
+  chainId: ChainId.testnet,
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+};
+
+const analytics = await getCollectionAnalytics(params);
 ```
 
 ### Main actions
@@ -459,15 +527,15 @@ import {
   checkIsErc721OrderValid,
   getTokensNeedToApprove,
   checkIsErc20Approved,
-  buyToken
-} from '@sky-mavis/mavis-market-core';
+  buyToken,
+} from "@zentry/mavis-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
-const account = '0xce21e5ed74935379eda4d9120c3887423f960aac';
+const account = "0xce21e5ed74935379eda4d9120c3887423f960aac";
 const chainId = ChainId.testnet;
-const amount = '1000000000000000000';
-const hash = 'f7c91f6f72b3fc2c19efea6abf34a6e713abc67c3beab9b152fa1f591b4472c8';
+const amount = "1000000000000000000";
+const hash = "f7c91f6f72b3fc2c19efea6abf34a6e713abc67c3beab9b152fa1f591b4472c8";
 
 const wallet = createWalletClient();
 
@@ -489,7 +557,6 @@ const checkIsOrderValid = async () => {
   const order = await getOrder({ chainId, hash });
   const isValid = await checkIsErc721OrderValid(chainId, order);
 };
-
 
 // approve token
 const checkIsTokenApproved = async () => {
@@ -519,7 +586,6 @@ const params = {
 };
 const tx = await approveToken(params);
 
-
 // buy
 const deadline = parseInt(`${new Date().getTime() / 1000 + 30 * 60}`); // 30 minutes
 
@@ -546,39 +612,45 @@ import {
   getErc1155Orders,
   paymentTokens,
   Token,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
-import { getOrdersByQuantity } from './src/services/order/getOrdersByQuantity';
+import { getOrdersByQuantity } from "./src/services/order/getOrdersByQuantity";
 
 const chainId = ChainId.testnet;
 const wallet = createWalletClient();
 const paymentTokenAddress = paymentTokens[chainId][Token.WETH].address;
-const deadline = parseInt(`${new Date().getTime() / 1000 + 30 * 60}`).toString(); // 30 minutes
+const deadline = parseInt(
+  `${new Date().getTime() / 1000 + 30 * 60}`
+).toString(); // 30 minutes
 
 const tokenIds = [
   {
-    tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-    tokenId: '1460',
+    tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+    tokenId: "1460",
   },
   {
-    tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-    tokenId: '508',
+    tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+    tokenId: "508",
   },
 ];
 
 const getActiveOrdersOfTokenParams = { chainId: ChainId.testnet, tokenIds };
-const activeOrdersOfTokens = await getActiveOrdersOfTokens(getActiveOrdersOfTokenParams);
+const activeOrdersOfTokens = await getActiveOrdersOfTokens(
+  getActiveOrdersOfTokenParams
+);
 
-const selectedOrders: BulkBuyOrderData[] = activeOrdersOfTokens.map(order => ({
-  order,
-  quantity: 1,
-}));
+const selectedOrders: BulkBuyOrderData[] = activeOrdersOfTokens.map(
+  (order) => ({
+    order,
+    quantity: 1,
+  })
+);
 
 const tokensNeedToApproveByOrders = await getTokensNeedToApproveByOrders(
   chainId,
   wallet,
   selectedOrders,
-  paymentTokenAddress,
+  paymentTokenAddress
 );
 
 const bulkBuyErc721TokenParams = {
@@ -595,6 +667,7 @@ const tx = await bulkBuyToken(bulkBuyErc721TokenParams);
 ```
 
 #### _Bulk buy ERC1155 tokens_
+
 ```javascript
 import {
   BulkBuyOrderData,
@@ -605,35 +678,40 @@ import {
   getErc1155Orders,
   paymentTokens,
   Token,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
-import { getOrdersByQuantity } from './src/services/order/getOrdersByQuantity';
+import { getOrdersByQuantity } from "./src/services/order/getOrdersByQuantity";
 
 const chainId = ChainId.testnet;
 const wallet = createWalletClient();
 const paymentTokenAddress = paymentTokens[chainId][Token.WETH].address;
 const quantity = 20;
-const deadline = parseInt(`${new Date().getTime() / 1000 + 30 * 60}`).toString(); // 30 minutes
+const deadline = parseInt(
+  `${new Date().getTime() / 1000 + 30 * 60}`
+).toString(); // 30 minutes
 
 const getErc1155OrdersParams = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
   from: 0,
   size: 10,
-  maker: '0xce21e5ed74935379eda4d9120c3887423f960aac', // Optional,
+  maker: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional,
   showInvalid: true, // Optional
   sort: Erc1155SortBy.PriceAsc, // Optional
 };
 const chosenErc1155Orders = await getErc1155Orders(getErc1155OrdersParams);
 
-const selectedOrders: BulkBuyOrderData[] = getOrdersByQuantity(chosenErc1155Orders, quantity);
+const selectedOrders: BulkBuyOrderData[] = getOrdersByQuantity(
+  chosenErc1155Orders,
+  quantity
+);
 
 const tokensNeedToApproveByOrders = await getTokensNeedToApproveByOrders(
   chainId,
   wallet,
   selectedOrders,
-  paymentTokenAddress,
+  paymentTokenAddress
 );
 
 const bulkBuyErc1155TokenParams = {
@@ -648,6 +726,81 @@ const bulkBuyErc1155TokenParams = {
 const tx = await bulkBuyToken(bulkBuyErc1155TokenParams);
 ```
 
+#### _Bulk buy ERC1155 tokens by criteria_
+
+```javascript
+import { parseEther } from 'ethers/lib/utils';
+import {
+  approveToken,
+  BulkBuyOrderData,
+  bulkBuyToken,
+  ChainId,
+  Erc,
+  getOrdersByCriteria,
+  GetOrdersByCriteriaParams,
+  getOrdersByQuantity,
+  getTokensNeedToApproveByOrders,
+  ApproveTokenType,
+  paymentTokens,
+  getConfig
+} from '@zentry/mavis-market-sdk';
+
+const paymentTokenAddress = '0x0000000000000000000000000000000000000000';
+const chainId = ChainId.testnet;
+const config = getConfig(chainId);
+const wallet: any = {}; // signer wallet
+const deadline = Math.floor(Date.now() / 1000) + 300; // 300 seconds from now
+const spenderAddress = config.contractsAddress.marketGatewayMultisend
+const availableOrders = await getOrdersByCriteria({
+  chainId: ChainId.testnet,
+  tokenAddress: '0x2f2c1d8fc5c242d6c9fc14b9e9997f55eff2d61a',
+  maxPrice: BigInt(parseUnits('10', 6).toString()), // 10 ION
+  criteria: [
+    {
+      name: 'Item ID',
+      values: ['656'],
+    },
+  ],
+  from: 0,
+  size: 10,
+});
+
+const quantity = 10;
+
+const selectedOrders: BulkBuyOrderData[] = getOrdersByQuantity(availableOrders, quantity);
+
+const tokensNeedToApproveByOrders = await getTokensNeedToApproveByOrders(
+  chainId,
+  wallet,
+  selectedOrders,
+  paymentTokenAddress,
+  spenderAddress,
+);
+
+if (tokensNeedToApproveByOrders.length > 0) {
+  //approve any token
+  const approveTx = await approveToken({
+    address: tokensNeedToApproveByOrders[0].address,
+    chainId,
+    wallet,
+    tokenType: ApproveTokenType.Erc20,
+    spenderAddress,
+  });
+}
+
+const bulkBuyErc1155TokenParams = {
+  chainId,
+  wallet,
+  data: selectedOrders,
+  selectedTokenAddress: paymentTokenAddress,
+  deadline: deadline.toString(), // seconds,
+  tokenType: Erc.Erc1155,
+  requiredAllSuccess: false,
+};
+const tx = await bulkBuyToken(bulkBuyErc1155TokenParams);
+
+```
+
 #### _Create order_
 
 ```javascript
@@ -655,12 +808,12 @@ import {
   ChainId,
   ApproveTokenType,
   checkIsErc721Approved,
-  approveToken
-} from '@sky-mavis/mavis-market-core';
-import * as functions from '@sky-mavis/mavis-market-core';
+  approveToken,
+} from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
-const tokenAddress = '0x3fe52e39c3241ee5440a57edbb553563356b770c';
+const tokenAddress = "0x3fe52e39c3241ee5440a57edbb553563356b770c";
 const chainId = ChainId.testnet;
 
 const wallet = createWalletClient();
@@ -687,9 +840,9 @@ const params = {
   wallet,
   chainId,
   tokenAddress,
-  tokenId: '982',
+  tokenId: "982",
   paymentToken: wethAddress,
-  price: '1000000000000000000',
+  price: "1000000000000000000",
   duration: 1000000, // seconds
 };
 const order = await createOrder(params);
@@ -698,17 +851,14 @@ const order = await createOrder(params);
 #### _Cancel order_
 
 ```javascript
-import {
-  ChainId,
-  cancelOrder,
-} from '@sky-mavis/mavis-market-core';
-import * as functions from '@sky-mavis/mavis-market-core';
+import { ChainId, cancelOrder } from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const wallet = createWalletClient();
 const params = {
   wallet,
   chainId: ChainId.testnet,
-  hash: 'f7c91f6f72b3fc2c19efea6abf34a6e713abc67c3beab9b152fa1f591b4472c8',
+  hash: "f7c91f6f72b3fc2c19efea6abf34a6e713abc67c3beab9b152fa1f591b4472c8",
 };
 
 const tx = await cancelOrder(params);
@@ -717,16 +867,16 @@ const tx = await cancelOrder(params);
 #### _Gift_
 
 ```javascript
-import { ChainId, giftToken } from '@sky-mavis/mavis-market-core';
+import { ChainId, giftToken } from "@zentry/mavis-market-sdk";
 
 const wallet = createWalletClient();
 
 const params = {
   wallet,
   chainId: ChainId.testnet,
-  tokenId: '982',
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  receiverAddress: '0x1ef7a5fefc14fd7f48c31cca651741549a692183',
+  tokenId: "982",
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  receiverAddress: "0x1ef7a5fefc14fd7f48c31cca651741549a692183",
 };
 const tx = await giftToken(params);
 ```
@@ -734,14 +884,14 @@ const tx = await giftToken(params);
 #### _Wrap ron, unwrap ron_
 
 ```javascript
-import { ChainId, wrapRon, unwrapRon } from '@sky-mavis/mavis-market-core';
+import { ChainId, wrapRon, unwrapRon } from "@zentry/mavis-market-sdk";
 
 // wrap RON
 const wallet = createWalletClient();
 const params = {
   wallet,
   chainId: ChainId.testnet,
-  amount: '10',
+  amount: "10",
 };
 const tx = await functions.wrapRon(params);
 
@@ -750,7 +900,7 @@ const wallet = createWalletClient();
 const params = {
   wallet,
   chainId: ChainId.testnet,
-  amount: '10',
+  amount: "10",
 };
 const tx = await functions.unwrapRon(params);
 ```
@@ -763,20 +913,17 @@ import {
   checkIsInsufficientOfferBalance,
   checkIsWRonTokenApproved,
   approveToken,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
-const account = '0xce21e5ed74935379eda4d9120c3887423f960aac';
-const amount = '1000000000000000000';
+const account = "0xce21e5ed74935379eda4d9120c3887423f960aac";
+const amount = "1000000000000000000";
 const wRonAddress = wRonToken[chainId].address;
 
-const isInsufficientOfferBalance = await functions.checkIsInsufficientOfferBalance(chainId, account, amount);
-const isWronApproved = await checkIsWRonTokenApproved(
-  chainId,
-  account,
-  amount,
-);
-if(!isWronApproved) {
+const isInsufficientOfferBalance =
+  await functions.checkIsInsufficientOfferBalance(chainId, account, amount);
+const isWronApproved = await checkIsWRonTokenApproved(chainId, account, amount);
+if (!isWronApproved) {
   const params = {
     wallet,
     chainId,
@@ -791,9 +938,9 @@ const wallet = createWalletClient();
 const params = {
   wallet,
   chainId,
-  tokenId: '529',
-  tokenAddress: '0x3fe52e39c3241ee5440a57edbb553563356b770c',
-  price: '1000000000000000000',
+  tokenId: "529",
+  tokenAddress: "0x3fe52e39c3241ee5440a57edbb553563356b770c",
+  price: "1000000000000000000",
   duration: 10000, // seconds
 };
 const offer = await functions.makeOffer(params);
@@ -802,13 +949,13 @@ const offer = await functions.makeOffer(params);
 #### _Accept offer_
 
 ```javascript
-import { ChainId, acceptOffer } from '@sky-mavis/mavis-market-core';
+import { ChainId, acceptOffer } from "@zentry/mavis-market-sdk";
 
 const wallet = createWalletClient();
 const params = {
   wallet,
   chainId: ChainId.testnet,
-  hash: '1c91a5a0d8ef022344166e60e3da96ba819278fe496c4008bc0d028e8c9ab690',
+  hash: "1c91a5a0d8ef022344166e60e3da96ba819278fe496c4008bc0d028e8c9ab690",
 };
 const tx = await functions.acceptOffer(params);
 ```
@@ -816,8 +963,8 @@ const tx = await functions.acceptOffer(params);
 #### _Cancel offer_
 
 ```javascript
-import { ChainId, cancelOffer } from '@sky-mavis/mavis-market-core';
-import * as functions from '@sky-mavis/mavis-market-core';
+import { ChainId, cancelOffer } from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const cancelOffer = async () => {
   const wallet = createWalletClient();
@@ -825,7 +972,7 @@ const cancelOffer = async () => {
   const params = {
     wallet,
     chainId: ChainId.testnet,
-    hash: '1c91a5a0d8ef022344166e60e3da96ba819278fe496c4008bc0d028e8c9ab690',
+    hash: "1c91a5a0d8ef022344166e60e3da96ba819278fe496c4008bc0d028e8c9ab690",
   };
 
   const tx = await functions.cancelOffer(params);
@@ -835,14 +982,37 @@ const cancelOffer = async () => {
 #### _Refresh metadata_
 
 ```javascript
-import { ChainId, refreshMetadata } from '@sky-mavis/mavis-market-core';
+import { ChainId, refreshMetadata } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
 };
 refreshMetadata(params);
+```
+
+#### _Get my ERC1155 tokens list_
+
+```javascript
+import {
+  ChainId,
+  getMyErc1155TokensList,
+  AuctionType,
+  SortBy,
+} from '@sky-mavis/mavis-market-core';
+
+const params = {
+  chainId: ChainId.testnet,
+  owner: "0xe59471222b8c2b47aa2fee80026bfbf0ba3c57bb",
+  tokenAddress: "0xf6fe00893eea4d47f0cba303ef518fe4ab1c9dd6",
+  auctionType: AuctionType.All,
+  sort: SortBy.PriceAsc,
+  from: 0,
+  size: 50,
+};
+
+const { total, results } = await getMyErc1155TokensList(params);
 ```
 
 ### Utilities functions
@@ -850,14 +1020,14 @@ refreshMetadata(params);
 #### _Create wallet client_
 
 ```javascript
-import { ChainId } from '@sky-mavis/mavis-market-core';
+import { ChainId } from "@zentry/mavis-market-sdk";
 
 const createWalletClient = () => {
   const web3Provider = new ethers.providers.Web3Provider(window.ronin.provider);
   const { signer, provider } = web3Provider;
 
   return {
-    account: '0xce21e5ed74935379eda4d9120c3887423f960aac',
+    account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
     signer,
     provider,
   };
@@ -872,7 +1042,7 @@ import {
   paymentTokens,
   Token,
   getRate,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const exchangeRate = await getExchangeRate();
 const ronSymbol = paymentTokens[chainId][Token.RON].symbol;
@@ -883,7 +1053,7 @@ const rate = getRate(ronSymbol, exchangeRate);
 #### _Get config_
 
 ```javascript
-import { getConfig } from '@sky-mavis/mavis-market-core';
+import { getConfig } from "@zentry/mavis-market-sdk";
 
 const configs = getConfig(ChainId.testnet);
 ```
@@ -896,7 +1066,7 @@ import {
   paymentTokens,
   Token,
   getSwapConfig,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -907,7 +1077,7 @@ const swapConfig = getSwapConfig(chainId, ronAddress);
 #### _Get payment tokens_
 
 ```javascript
-import { ChainId, getPaymentTokens } from '@sky-mavis/mavis-market-core';
+import { ChainId, getPaymentTokens } from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 
@@ -917,7 +1087,7 @@ const tokens = getPaymentTokens(chainId);
 #### _Get offer token_
 
 ```javascript
-import { ChainId, wRonToken } from '@sky-mavis/mavis-market-core';
+import { ChainId, wRonToken } from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const offerToken = wRonToken[chainId].address;
@@ -931,7 +1101,7 @@ import {
   paymentTokens,
   Token,
   getSwapTokenData,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -940,7 +1110,7 @@ const params = {
   chainId: ChainId.testnet,
   inputTokenAddress: wethAddress,
   outputTokenAddress: ronAddress,
-  amount: '1000000000000000000',
+  amount: "1000000000000000000",
 };
 
 const {
@@ -956,15 +1126,15 @@ const {
 #### _Get orders by quantity_
 
 ```javascript
-import { getOrdersByQuantity } from '@sky-mavis/mavis-market-core';
+import { getOrdersByQuantity } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
   from: 0,
   size: 10,
-  maker: '0xce21e5ed74935379eda4d9120c3887423f960aac', // Optional,
+  maker: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional,
   showInvalid: true, // Optional
   sort: Erc1155SortBy.PriceAsc, // Optional
 };
@@ -985,7 +1155,7 @@ import {
   getOrdersTotalPrice,
   paymentTokens,
   Token,
-} from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const wallet = createWalletClient();
@@ -993,16 +1163,19 @@ const selectedToken = paymentTokens[chainId][Token.RON];
 const quantity = 20;
 const getErc1155OrdersParams = {
   chainId: ChainId.testnet,
-  tokenAddress: '0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09',
-  tokenId: '5',
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
   from: 0,
   size: 10,
-  maker: '0xce21e5ed74935379eda4d9120c3887423f960aac', // Optional,
+  maker: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional,
   showInvalid: true, // Optional
   sort: Erc1155SortBy.PriceAsc, // Optional
 };
 const chosenErc1155Orders = await getErc1155Orders(getErc1155OrdersParams);
-const selectedOrders: BulkBuyOrderData[] = getOrdersByQuantity(chosenErc1155Orders, quantity);
+const selectedOrders: BulkBuyOrderData[] = getOrdersByQuantity(
+  chosenErc1155Orders,
+  quantity
+);
 const { totalPrice, totalPriceOfEachOrder } = await getOrdersTotalPrice({
   chainId,
   wallet,
@@ -1020,10 +1193,10 @@ import {
   Token,
   getExchangeRate,
   convertAmountToUsd,
-} from '@sky-mavis/mavis-market-core';
-import * as functions from '@sky-mavis/mavis-market-core';
+} from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
-const amount = '1000000000000000000';
+const amount = "1000000000000000000";
 const ronSymbol = paymentTokens[chainId][Token.RON].symbol;
 
 const exchangeRate = await getExchangeRate(ChainId.testnet);
