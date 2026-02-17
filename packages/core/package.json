@@ -1,7 +1,7 @@
 {
-  "name": "@maxion/mavis-market-sdk",
-  "version": "0.0.17",
-  "description": "Mavis Market SDK",
+  "name": "@maxion-platform/ronin-market-sdk",
+  "version": "1.0.0",
+  "description": "Ronin Market SDK",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
   "types": "./dist/types/index.d.ts",
@@ -30,7 +30,7 @@
     "url": ""
   },
   "keywords": [],
-  "author": "Maxion",
+  "author": "Maxion Platform",
   "license": "MIT",
   "dependencies": {
     "lodash": "4.17.21",

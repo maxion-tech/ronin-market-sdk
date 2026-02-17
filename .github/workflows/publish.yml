@@ -2,34 +2,33 @@ name: Publish package
 on:
   release:
     types: [created]
-    branches: [main]
 
 jobs:
   publish:
-    if: ${{ true == startsWith(github.event.release.tag_name, 'mavis-market-core/') }}
+    if: startsWith(github.event.release.tag_name, 'ronin-market-sdk/')
     runs-on: ubuntu-latest
-    environment: npm-production
+    environment: production
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
 
       - name: Setup npmrc
         run: |
-          echo "@sky-mavis:registry=https://registry.npmjs.org/" >> .npmrc
+          echo "@maxion-platform:registry=https://registry.npmjs.org/" >> .npmrc
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> .npmrc
 
       - name: Install dependencies
-        run: cd packages/core && yarn
+        run: cd packages/core && yarn install --immutable
 
       - name: Build
         run: cd packages/core && yarn build
 
-      - name: Publish @sky-mavis/mavis-market-core
+      - name: Publish @maxion-platform/ronin-market-sdk
         run: cd packages/core && npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

@@ -5,13 +5,13 @@
 With yarn
 
 ```
- yarn add @maxion/mavis-market-sdk
+ yarn add @maxion-platform/ronin-market-sdk
 ```
 
 With npm
 
 ```
- npm install @maxion/mavis-market-sdk --save
+ npm install @maxion-platform/ronin-market-sdk --save
 ```
 
 ## Usage
@@ -20,13 +20,12 @@ With npm
 
 The SDK supports using the API Gateway endpoint for mainnet by setting the `MARKETPLACE_API_KEY` environment variable. When this variable is set, requests to mainnet will automatically use the API Gateway endpoint instead of the default GraphQL endpoint.
 
-
 ### Fetch data
 
 #### _Get all collections_
 
 ```javascript
-import { ChainId, getCollections } from "@maxion/mavis-market-sdk";
+import { ChainId, getCollections } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -40,7 +39,7 @@ const { erc721Collections, erc1155Collections } = await getCollections(params);
 #### _Get collection detail_
 
 ```javascript
-import { ChainId, getCollection } from "@maxion/mavis-market-sdk";
+import { ChainId, getCollection } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -53,7 +52,7 @@ const collection = await getCollection(params);
 #### _Get token metadata_
 
 ```javascript
-import { ChainId, getTokenMetadata } from "@maxion/mavis-market-sdk";
+import { ChainId, getTokenMetadata } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -72,7 +71,7 @@ import {
   AuctionType,
   ListingSortBy,
   getAllTokens,
-} from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -90,12 +89,7 @@ const { total, tokens } = await getAllTokens(params);
 #### _Get erc721 tokens_
 
 ```javascript
-import {
-  ChainId,
-  AuctionType,
-  SortBy,
-  getErc721Tokens,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, AuctionType, SortBy, getErc721Tokens } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -128,7 +122,7 @@ const { total, results } = await getErc721Tokens(params);
 #### _Get erc721 token detail_
 
 ```javascript
-import { ChainId, getErc721Token } from "@maxion/mavis-market-sdk";
+import { ChainId, getErc721Token } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -142,10 +136,7 @@ const data = await getErc721Token(params);
 #### _Get erc721 token transfer history_
 
 ```javascript
-import {
-  ChainId,
-  getErc721TokenTransferHistory,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, getErc721TokenTransferHistory } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -161,12 +152,7 @@ const { total, results } = await getErc721TokenTransferHistory(params);
 #### _Get erc1155 tokens_
 
 ```javascript
-import {
-  ChainId,
-  AuctionType,
-  SortBy,
-  getErc1155Tokens,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, AuctionType, SortBy, getErc1155Tokens } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -186,7 +172,7 @@ const { total, results } = await getErc1155Tokens(params);
 #### _Get erc1155 token detail_
 
 ```javascript
-import { ChainId, getErc1155Token } from "@maxion/mavis-market-sdk";
+import { ChainId, getErc1155Token } from "@maxion-platform/ronin-market-sdk";
 const params = {
   chainId: ChainId.testnet,
   tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
@@ -199,7 +185,7 @@ const data = await getErc1155Token(params);
 #### _Get erc1155 token with orders_
 
 ```javascript
-import { ChainId, getErc1155TokenWithOrders } from '@sky-mavis/mavis-market-core';
+import { ChainId, getErc1155TokenWithOrders } from "@sky-mavis/mavis-market-core";
 
 const params = {
   chainId: ChainId.testnet,
@@ -213,12 +199,7 @@ const data = await getErc1155TokenWithOrders(params);
 #### _Get erc1155 tokens list_
 
 ```javascript
-import {
-  ChainId,
-  getErc1155TokensList,
-  AuctionType,
-  SortBy,
-} from '@sky-mavis/mavis-market-core';
+import { ChainId, getErc1155TokensList, AuctionType, SortBy } from "@sky-mavis/mavis-market-core";
 
 const params = {
   chainId: ChainId.testnet,
@@ -247,10 +228,7 @@ const { total, results } = await getErc1155TokensList(params);
 #### _Get erc1155 token transfer history_
 
 ```javascript
-import {
-  ChainId,
-  getErc1155TokenTransferHistory,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, getErc1155TokenTransferHistory } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -266,7 +244,7 @@ const { total, results } = await getErc1155TokenTransferHistory(params);
 #### _Get erc1155 balance_
 
 ```javascript
-import { ChainId, getErc1155Balance } from "@maxion/mavis-market-sdk";
+import { ChainId, getErc1155Balance } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -281,7 +259,7 @@ const balance = await getErc1155Balance(params);
 #### _Get erc721 order_
 
 ```javascript
-import { ChainId, getErc721Order } from "@maxion/mavis-market-sdk";
+import { ChainId, getErc721Order } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -295,7 +273,7 @@ const order = await getErc721Order(params);
 #### _Get erc721 active orders of tokens_
 
 ```javascript
-import { ChainId, getActiveOrdersOfTokens } from "@maxion/mavis-market-sdk";
+import { ChainId, getActiveOrdersOfTokens } from "@maxion-platform/ronin-market-sdk";
 
 const tokenIds = [
   {
@@ -316,11 +294,7 @@ const activeOrdersOfTokens = await getActiveOrdersOfTokens(params);
 #### _Get erc1155 orders_
 
 ```javascript
-import {
-  ChainId,
-  Erc1155SortBy,
-  getErc1155Orders,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, Erc1155SortBy, getErc1155Orders } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -339,7 +313,7 @@ const orders = await getErc1155Orders(params);
 #### _Get order by hash_
 
 ```javascript
-import { ChainId, getOrderByHash } from "@maxion/mavis-market-sdk";
+import { ChainId, getOrderByHash } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -352,15 +326,10 @@ const order = await getOrderByHash(params);
 #### _Get orders by address_
 
 ```javascript
-import {
-  ChainId,
-  ListingSortBy,
-  Erc,
-  getOrdersByAddress,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, ListingSortBy, Erc, getOrdersByAddress } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
-  accessToken: '',
+  accessToken: "",
   chainId: ChainId.testnet,
   account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
   from: 0,
@@ -379,7 +348,7 @@ const { total, quantity, data } = await getOrdersByAddress(params);
 #### _Get offers_
 
 ```javascript
-import { ChainId, getOffers } from "@maxion/mavis-market-sdk";
+import { ChainId, getOffers } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -395,7 +364,7 @@ const offers = await getOffers(params);
 #### _Get offer detail_
 
 ```javascript
-import { ChainId, getOffer } from "@maxion/mavis-market-sdk";
+import { ChainId, getOffer } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -408,12 +377,7 @@ const offer = await getOffer(params);
 #### _Get sent offers_
 
 ```javascript
-import {
-  ChainId,
-  getSentOffers,
-  Erc,
-  OfferSortBy,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, getSentOffers, Erc, OfferSortBy } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -434,12 +398,7 @@ const { total, data } = await getSentOffers(params);
 #### _Get received offers_
 
 ```javascript
-import {
-  ChainId,
-  Erc,
-  OfferSortBy,
-  getReceivedOffers,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, Erc, OfferSortBy, getReceivedOffers } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -460,22 +419,20 @@ const { total, data } = await getReceivedOffers(params);
 #### _Get offers amount_
 
 ```javascript
-import { ChainId, getOffersAmount } from "@maxion/mavis-market-sdk";
+import { ChainId, getOffersAmount } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
   account: "0xce21e5ed74935379eda4d9120c3887423f960aac",
 };
 
-const { receivedOffersAmount, sentOffersAmount } = await getOffersAmount(
-  params
-);
+const { receivedOffersAmount, sentOffersAmount } = await getOffersAmount(params);
 ```
 
 #### _Get offer by address_
 
 ```javascript
-import { ChainId, getOfferByAddress } from "@maxion/mavis-market-sdk";
+import { ChainId, getOfferByAddress } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -490,7 +447,7 @@ const offer = await getOfferByAddress(params);
 #### _Get exchange rate_
 
 ```javascript
-import { ChainId, getExchangeRate } from "@maxion/mavis-market-sdk";
+import { ChainId, getExchangeRate } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -502,7 +459,7 @@ const exchangeRate = await getExchangeRate(params);
 #### _Get collection analytics_
 
 ```javascript
-import { ChainId, getCollectionAnalytics } from '@sky-mavis/mavis-market-core';
+import { ChainId, getCollectionAnalytics } from "@sky-mavis/mavis-market-core";
 
 const params = {
   chainId: ChainId.testnet,
@@ -528,7 +485,7 @@ import {
   getTokensNeedToApprove,
   checkIsErc20Approved,
   buyToken,
-} from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -612,7 +569,7 @@ import {
   getErc1155Orders,
   paymentTokens,
   Token,
-} from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
 
 import { getOrdersByQuantity } from "./src/services/order/getOrdersByQuantity";
 
@@ -678,7 +635,7 @@ import {
   getErc1155Orders,
   paymentTokens,
   Token,
-} from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
 
 import { getOrdersByQuantity } from "./src/services/order/getOrdersByQuantity";
 
@@ -743,7 +700,7 @@ import {
   ApproveTokenType,
   paymentTokens,
   getConfig
-} from '@maxion/mavis-market-sdk';
+} from '@maxion-platform/ronin-market-sdk';
 
 const paymentTokenAddress = '0x0000000000000000000000000000000000000000';
 const chainId = ChainId.testnet;
@@ -809,8 +766,8 @@ import {
   ApproveTokenType,
   checkIsErc721Approved,
   approveToken,
-} from "@maxion/mavis-market-sdk";
-import * as functions from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
+import * as functions from "@maxion-platform/ronin-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const tokenAddress = "0x3fe52e39c3241ee5440a57edbb553563356b770c";
@@ -819,11 +776,7 @@ const chainId = ChainId.testnet;
 const wallet = createWalletClient();
 
 // check token is approved
-const isApproved = await functions.checkIsErc721Approved(
-  chainId,
-  account,
-  tokenAddress
-);
+const isApproved = await functions.checkIsErc721Approved(chainId, account, tokenAddress);
 
 //approve token
 const params = {
@@ -851,8 +804,8 @@ const order = await createOrder(params);
 #### _Cancel order_
 
 ```javascript
-import { ChainId, cancelOrder } from "@maxion/mavis-market-sdk";
-import * as functions from "@maxion/mavis-market-sdk";
+import { ChainId, cancelOrder } from "@maxion-platform/ronin-market-sdk";
+import * as functions from "@maxion-platform/ronin-market-sdk";
 
 const wallet = createWalletClient();
 const params = {
@@ -867,7 +820,7 @@ const tx = await cancelOrder(params);
 #### _Gift_
 
 ```javascript
-import { ChainId, giftToken } from "@maxion/mavis-market-sdk";
+import { ChainId, giftToken } from "@maxion-platform/ronin-market-sdk";
 
 const wallet = createWalletClient();
 
@@ -884,7 +837,7 @@ const tx = await giftToken(params);
 #### _Wrap ron, unwrap ron_
 
 ```javascript
-import { ChainId, wrapRon, unwrapRon } from "@maxion/mavis-market-sdk";
+import { ChainId, wrapRon, unwrapRon } from "@maxion-platform/ronin-market-sdk";
 
 // wrap RON
 const wallet = createWalletClient();
@@ -913,15 +866,18 @@ import {
   checkIsInsufficientOfferBalance,
   checkIsWRonTokenApproved,
   approveToken,
-} from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
 
 const chainId = ChainId.testnet;
 const account = "0xce21e5ed74935379eda4d9120c3887423f960aac";
 const amount = "1000000000000000000";
 const wRonAddress = wRonToken[chainId].address;
 
-const isInsufficientOfferBalance =
-  await functions.checkIsInsufficientOfferBalance(chainId, account, amount);
+const isInsufficientOfferBalance = await functions.checkIsInsufficientOfferBalance(
+  chainId,
+  account,
+  amount,
+);
 const isWronApproved = await checkIsWRonTokenApproved(chainId, account, amount);
 if (!isWronApproved) {
   const params = {
@@ -949,7 +905,7 @@ const offer = await functions.makeOffer(params);
 #### _Accept offer_
 
 ```javascript
-import { ChainId, acceptOffer } from "@maxion/mavis-market-sdk";
+import { ChainId, acceptOffer } from "@maxion-platform/ronin-market-sdk";
 
 const wallet = createWalletClient();
 const params = {
@@ -963,8 +919,8 @@ const tx = await functions.acceptOffer(params);
 #### _Cancel offer_
 
 ```javascript
-import { ChainId, cancelOffer } from "@maxion/mavis-market-sdk";
-import * as functions from "@maxion/mavis-market-sdk";
+import { ChainId, cancelOffer } from "@maxion-platform/ronin-market-sdk";
+import * as functions from "@maxion-platform/ronin-market-sdk";
 
 const cancelOffer = async () => {
   const wallet = createWalletClient();
@@ -982,7 +938,7 @@ const cancelOffer = async () => {
 #### _Refresh metadata_
 
 ```javascript
-import { ChainId, refreshMetadata } from "@maxion/mavis-market-sdk";
+import { ChainId, refreshMetadata } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -995,12 +951,7 @@ refreshMetadata(params);
 #### _Get my ERC1155 tokens list_
 
 ```javascript
-import {
-  ChainId,
-  getMyErc1155TokensList,
-  AuctionType,
-  SortBy,
-} from '@sky-mavis/mavis-market-core';
+import { ChainId, getMyErc1155TokensList, AuctionType, SortBy } from "@sky-mavis/mavis-market-core";
 
 const params = {
   chainId: ChainId.testnet,
@@ -1020,7 +971,7 @@ const { total, results } = await getMyErc1155TokensList(params);
 #### _Create wallet client_
 
 ```javascript
-import { ChainId } from "@maxion/mavis-market-sdk";
+import { ChainId } from "@maxion-platform/ronin-market-sdk";
 
 const createWalletClient = () => {
   const web3Provider = new ethers.providers.Web3Provider(window.ronin.provider);
@@ -1037,12 +988,7 @@ const createWalletClient = () => {
 #### _Get rate_
 
 ```javascript
-import {
-  ChainId,
-  paymentTokens,
-  Token,
-  getRate,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, paymentTokens, Token, getRate } from "@maxion-platform/ronin-market-sdk";
 
 const exchangeRate = await getExchangeRate();
 const ronSymbol = paymentTokens[chainId][Token.RON].symbol;
@@ -1053,7 +999,7 @@ const rate = getRate(ronSymbol, exchangeRate);
 #### _Get config_
 
 ```javascript
-import { getConfig } from "@maxion/mavis-market-sdk";
+import { getConfig } from "@maxion-platform/ronin-market-sdk";
 
 const configs = getConfig(ChainId.testnet);
 ```
@@ -1061,12 +1007,7 @@ const configs = getConfig(ChainId.testnet);
 #### _Get swap config_
 
 ```javascript
-import {
-  ChainId,
-  paymentTokens,
-  Token,
-  getSwapConfig,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, paymentTokens, Token, getSwapConfig } from "@maxion-platform/ronin-market-sdk";
 
 const chainId = ChainId.testnet;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -1077,7 +1018,7 @@ const swapConfig = getSwapConfig(chainId, ronAddress);
 #### _Get payment tokens_
 
 ```javascript
-import { ChainId, getPaymentTokens } from "@maxion/mavis-market-sdk";
+import { ChainId, getPaymentTokens } from "@maxion-platform/ronin-market-sdk";
 
 const chainId = ChainId.testnet;
 
@@ -1087,7 +1028,7 @@ const tokens = getPaymentTokens(chainId);
 #### _Get offer token_
 
 ```javascript
-import { ChainId, wRonToken } from "@maxion/mavis-market-sdk";
+import { ChainId, wRonToken } from "@maxion-platform/ronin-market-sdk";
 
 const chainId = ChainId.testnet;
 const offerToken = wRonToken[chainId].address;
@@ -1096,12 +1037,7 @@ const offerToken = wRonToken[chainId].address;
 #### _Get swap token data_
 
 ```javascript
-import {
-  ChainId,
-  paymentTokens,
-  Token,
-  getSwapTokenData,
-} from "@maxion/mavis-market-sdk";
+import { ChainId, paymentTokens, Token, getSwapTokenData } from "@maxion-platform/ronin-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -1126,7 +1062,7 @@ const {
 #### _Get orders by quantity_
 
 ```javascript
-import { getOrdersByQuantity } from "@maxion/mavis-market-sdk";
+import { getOrdersByQuantity } from "@maxion-platform/ronin-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -1155,7 +1091,7 @@ import {
   getOrdersTotalPrice,
   paymentTokens,
   Token,
-} from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
 
 const chainId = ChainId.testnet;
 const wallet = createWalletClient();
@@ -1193,8 +1129,8 @@ import {
   Token,
   getExchangeRate,
   convertAmountToUsd,
-} from "@maxion/mavis-market-sdk";
-import * as functions from "@maxion/mavis-market-sdk";
+} from "@maxion-platform/ronin-market-sdk";
+import * as functions from "@maxion-platform/ronin-market-sdk";
 
 const amount = "1000000000000000000";
 const ronSymbol = paymentTokens[chainId][Token.RON].symbol;
