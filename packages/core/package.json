@@ -33,6 +33,7 @@
   "author": "Maxion Platform",
   "license": "MIT",
   "dependencies": {
+    "ethers": "5.7.2",
     "lodash": "4.17.23",
     "typechain": "8.1.1"
   },
